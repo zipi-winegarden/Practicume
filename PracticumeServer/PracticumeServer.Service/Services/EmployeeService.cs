@@ -90,7 +90,7 @@ namespace PracticumeServer.Service.Services
         }
         private bool IsValidBirthDate(DateTime empBirthDate)
         {
-            return (empBirthDate > DateTime.Now);
+            return (empBirthDate < DateTime.Now);
         }
         private bool AllStartDaysAreValid(Employee emp)
         {

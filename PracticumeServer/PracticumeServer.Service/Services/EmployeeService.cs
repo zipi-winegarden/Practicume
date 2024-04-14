@@ -31,6 +31,10 @@ namespace PracticumeServer.Service.Services
         public async Task<Employee> AddAsync(Employee employee)
         {
             IsValidEmployee(employee);
+               if (await IsValidIdNumber(emp.IDNumber)==false)
+            {
+                throw new ArgumentException("IDNumber is already exist!");
+            }
             return await _employeesRepository.AddAsync(employee);
         }
         public async Task<Employee> DeleteAsync(int id)
@@ -46,10 +50,7 @@ namespace PracticumeServer.Service.Services
         private async void IsValidEmployee(Employee emp)
         {
 
-            if (await IsValidIdNumber(emp.IDNumber)==false)
-            {
-                throw new ArgumentException("IDNumber is already exist!");
-            }
+         
             if (!ContainsExactlyNineDigits(emp.IDNumber))
             {
                 throw new ArgumentException("IDNumber is not valid!");
